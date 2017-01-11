@@ -8,8 +8,13 @@
 </head>
 <body>
 	<h1>Agenda</h1>
-	<c:forEach items="${contatos}" var="contato">
-		<p>${contato.nome} - ${contato.telefone}</p>
-    </c:forEach>
+	<form action="${pageContext.request.contextPath}/contato.excluir" method="post">
+		<c:forEach items="${contatos}" var="contato">
+			<p>
+				${contato.nome} - ${contato.telefone} 
+				<button type="submit" name="id" value="${ contato.id }">Apagar</button>
+			</p>
+		</c:forEach>
+	</form>
 </body>
 </html>

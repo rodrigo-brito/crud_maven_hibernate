@@ -1,1 +1,1 @@
-<% request.getRequestDispatcher("agenda.do").forward(request, response); %>
+<% request.getRequestDispatcher("/contato.listar").forward(request, response); %>

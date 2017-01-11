@@ -16,17 +16,25 @@ public class ContatoDAO {
 	
 	public Contato find(long id){
 		EntityManager em = JPAUtil.getEntityManager();
-		return  em.find(Contato.class, id);
+		Contato contato = em.find(Contato.class, id);
+		em.close();
+		return contato;
 	}
 	
 	public List<Contato> findAll(){
 		EntityManager em = JPAUtil.getEntityManager();
-		return em.createQuery("FROM Contato").getResultList();
+		List<Contato> listaContatos = em.createQuery("FROM Contato").getResultList();
+		em.close();
+		return listaContatos;
 	}
 	
 	public void remove(long id){
 		EntityManager em = JPAUtil.getEntityManager();
-		Contato contato = this.find(id);
+		Contato contato = em.getReference(Contato.class, id);
+		System.out.println("DAO="+id);
+		em.getTransaction().begin();
 		em.remove(contato);
+		em.getTransaction().commit();
+		em.close();
 	}
 }
