@@ -9,19 +9,21 @@ public class Contato {
 	
 	@Id
 	@GeneratedValue
-	private Long id;
+	private long id;
 	private String nome;
 	private String telefone;
+	
+	public Contato() { }
 	
 	public Contato(String nome, String telefone) {
 		this.nome = nome;
 		this.telefone = telefone;
 	}
 	
-	public Long getId() {
+	public long getId() {
 		return id;
 	}
-	public void setId(Long id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 	public String getNome() {
@@ -35,5 +37,27 @@ public class Contato {
 	}
 	public void setTelefone(String telefone) {
 		this.telefone = telefone;
-	}	
+	}
+
+	@Override
+	public String toString() {
+		return "Contato [id=" + id + ", nome=" + nome + ", telefone=" + telefone + "]";
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj){
+			return true;
+		}
+		if (obj == null){
+			return false;
+		}
+		if (this.getClass() != obj.getClass()){
+			return false;
+		}
+		Contato contato = (Contato) obj;
+		return this.getId() == contato.getId() &&
+				this.getNome() == contato.getNome() &&
+				this.getTelefone() == contato.getTelefone();
+	}
 }

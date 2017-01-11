@@ -1,0 +1,1 @@
+<% request.getRequestDispatcher("agenda.do").forward(request, response); %>
