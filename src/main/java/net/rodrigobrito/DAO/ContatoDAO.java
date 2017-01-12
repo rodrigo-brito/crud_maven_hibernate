@@ -6,13 +6,22 @@ import net.rodrigobrito.model.Contato;
 import net.rodrigobrito.util.JPAUtil;
 
 public class ContatoDAO {
-	public void salvar(Contato contato){
+	public void save(Contato contato){
 		EntityManager em = JPAUtil.getEntityManager();
 		em.getTransaction().begin();
 		em.persist(contato);
 		em.getTransaction().commit();
 		em.close();
 	}
+	
+	public void update(Contato contato){
+		EntityManager em = JPAUtil.getEntityManager();
+		em.getTransaction().begin();
+		em.merge(contato);
+		em.getTransaction().commit();
+		em.close();
+	}
+	
 	
 	public Contato find(long id){
 		EntityManager em = JPAUtil.getEntityManager();
@@ -31,7 +40,6 @@ public class ContatoDAO {
 	public void remove(long id){
 		EntityManager em = JPAUtil.getEntityManager();
 		Contato contato = em.getReference(Contato.class, id);
-		System.out.println("DAO="+id);
 		em.getTransaction().begin();
 		em.remove(contato);
 		em.getTransaction().commit();

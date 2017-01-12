@@ -11,27 +11,23 @@ import net.rodrigobrito.DAO.ContatoDAO;
 import net.rodrigobrito.model.Contato;
 
 /**
- * Servlet implementation class ContatoSalvarServlet
+ * Servlet implementation class ContatoAtualziarServlet
  */
-@WebServlet(name="ContatoSalvarServlet", urlPatterns="/contato.salvar")
-public class ContatoSalvarServlet extends HttpServlet {
+@WebServlet(name="ContatoAtualziarServlet", urlPatterns="/contato.atualizar")
+public class ContatoAtualziarServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public ContatoSalvarServlet() { super(); }
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
 		ContatoDAO contatoDAO = new ContatoDAO();
-		String nome  = request.getParameter("nome");
-		String telefone  = request.getParameter("telefone");
-		String email  = request.getParameter("email");
-		Contato contato = new Contato(nome, telefone, email);
-		contatoDAO.save(contato);
+		Contato contato = contatoDAO.find(Long.parseLong( request.getParameter("id")));
+		contato.setNome(request.getParameter("nome"));
+		contato.setTelefone(request.getParameter("telefone"));
+		contato.setTelefone(request.getParameter("email"));
+		contatoDAO.update(contato);
 		response.sendRedirect("contato.listar");
 	}
 }

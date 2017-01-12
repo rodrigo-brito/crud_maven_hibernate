@@ -23,8 +23,8 @@ public class ContatoTest {
 	
 	@Test
 	public void testInsert() {
-		Contato contato = new Contato("Rodrigo", "9999-9999");
-		contatoDAO.salvar(contato);		
+		Contato contato = new Contato("Rodrigo", "9999-9999", "rodrigo@rodrigo.com.br");
+		contatoDAO.save(contato);		
 		Contato contatoRecordered = contatoDAO.find( contato.getId() );
 		assertNotEquals(contatoRecordered, null);
 		idContatoInserted = contatoRecordered.getId();
